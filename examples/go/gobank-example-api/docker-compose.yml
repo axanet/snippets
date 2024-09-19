@@ -1,0 +1,20 @@
+services:
+  gobank-db:
+    image: postgres:12
+    container_name: gobank-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: gobank
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: gobank
+
+  gobank:
+    depends_on:
+      - gobank-db
+    container_name: gobank
+    image: axanet/gobank:latest
+    build:
+      context: .
+      target: production
+    ports:
+      - "9090:9090"
