@@ -16,8 +16,8 @@ defmodule GalleryApiWeb.ImageController do
         "title" => title,
         "description" => description
       }) do
-    upload_path = Path.join(["uploads", upload.filename])
-    File.cp(upload.path, upload_path)
+    upload_path = Path.join([:code.priv_dir(:gallery_api), "static", "uploads", upload.filename])
+    File.cp!(upload.path, upload_path)
 
     image_params = %{
       title: title,

@@ -25,8 +25,6 @@ defmodule GalleryApiWeb.Endpoint do
     gzip: false,
     only: GalleryApiWeb.static_paths()
 
-  plug Plug.Static, at: "/uploads", from: "uploads"
-
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do

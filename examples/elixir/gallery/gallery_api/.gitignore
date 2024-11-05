@@ -29,7 +29,7 @@ gallery_api-*.tar
 
 .env
 
-/uploads/*
-!/uploads/.gitkeep
+/priv/static/uploads/*
+!/priv/static/uploads/.gitkeep
 
 .DS_Store
