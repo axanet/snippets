@@ -6,9 +6,9 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :gallery_api, GalleryApi.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
+  username: "gallery_api",
+  password: "1234567890",
+  hostname: "127.0.0.1",
   database: "gallery_api_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2

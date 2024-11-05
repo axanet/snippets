@@ -21,7 +21,11 @@ defmodule GalleryApi.GalleryTest do
     end
 
     test "create_image/1 with valid data creates a image" do
-      valid_attrs = %{description: "some description", title: "some title", image_path: "some image_path"}
+      valid_attrs = %{
+        description: "some description",
+        title: "some title",
+        image_path: "some image_path"
+      }
 
       assert {:ok, %Image{} = image} = Gallery.create_image(valid_attrs)
       assert image.description == "some description"
@@ -35,7 +39,12 @@ defmodule GalleryApi.GalleryTest do
 
     test "update_image/2 with valid data updates the image" do
       image = image_fixture()
-      update_attrs = %{description: "some updated description", title: "some updated title", image_path: "some updated image_path"}
+
+      update_attrs = %{
+        description: "some updated description",
+        title: "some updated title",
+        image_path: "some updated image_path"
+      }
 
       assert {:ok, %Image{} = image} = Gallery.update_image(image, update_attrs)
       assert image.description == "some updated description"
