@@ -11,7 +11,20 @@ defmodule GalleryApiWeb.ImageController do
     render(conn, :index, images: images)
   end
 
-  def create(conn, %{"image" => image_params}) do
+  def create(conn, %{
+        "image" => %Plug.Upload{} = upload,
+        "title" => title,
+        "description" => description
+      }) do
+    upload_path = Path.join(["uploads", upload.filename])
+    File.cp(upload.path, upload_path)
+
+    image_params = %{
+      title: title,
+      description: description,
+      image_path: upload_path
+    }
+
     with {:ok, %Image{} = image} <- Gallery.create_image(image_params) do
       conn
       |> put_status(:created)
@@ -39,5 +52,10 @@ defmodule GalleryApiWeb.ImageController do
     with {:ok, %Image{}} <- Gallery.delete_image(image) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+  defp build_file_url(conn, filename) do
+    # Construct the URL using the request's scheme and host
+    "#{conn.scheme}://#{conn.host}:#{conn.port}/uploads/#{filename}"
   end
 end

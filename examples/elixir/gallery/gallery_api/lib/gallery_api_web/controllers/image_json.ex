@@ -20,7 +20,7 @@ defmodule GalleryApiWeb.ImageJSON do
       id: image.id,
       title: image.title,
       description: image.description,
-      image_path: image.image_path
+      image_path: image.image_path.file_name
     }
   end
 end

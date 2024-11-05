@@ -7,6 +7,8 @@ defmodule GalleryApiWeb.Router do
 
   scope "/api", GalleryApiWeb do
     pipe_through :api
+
+    resources "/images", ImageController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

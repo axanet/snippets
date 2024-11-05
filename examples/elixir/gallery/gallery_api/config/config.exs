@@ -16,8 +16,8 @@ config :gallery_api, GalleryApiWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [json: GalleryApiWeb.ErrorJSON],
-    layout: false
+    view: GalleryApiWeb.ErrorJSON,
+    accepts: ~w(json)
   ],
   pubsub_server: GalleryApi.PubSub,
   live_view: [signing_salt: "XB9FZcYg"]
@@ -38,6 +38,10 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :waffle,
+  storage: Waffle.Storage.Local,
+  asset_host: "http://localhost:4000"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

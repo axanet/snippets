@@ -7,7 +7,7 @@ defmodule GalleryApi.Gallery.Image do
   schema "images" do
     field :description, :string
     field :title, :string
-    field :image_path, :string
+    field :image_path, GalleryApi.Uploaders.ImageUploader.Type
 
     timestamps(type: :utc_datetime)
   end
