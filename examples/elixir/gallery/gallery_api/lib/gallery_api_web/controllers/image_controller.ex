@@ -3,6 +3,7 @@ defmodule GalleryApiWeb.ImageController do
 
   alias GalleryApi.Gallery
   alias GalleryApi.Gallery.Image
+  alias GalleryApi.Gallery.ImageService
 
   action_fallback GalleryApiWeb.FallbackController
 
@@ -11,21 +12,8 @@ defmodule GalleryApiWeb.ImageController do
     render(conn, :index, images: images)
   end
 
-  def create(conn, %{
-        "image" => %Plug.Upload{} = upload,
-        "title" => title,
-        "description" => description
-      }) do
-    upload_path = Path.join([:code.priv_dir(:gallery_api), "static", "uploads", upload.filename])
-    File.cp!(upload.path, upload_path)
-
-    image_params = %{
-      title: title,
-      description: description,
-      image_path: upload_path
-    }
-
-    with {:ok, %Image{} = image} <- Gallery.create_image(image_params) do
+  def create(conn, new_image) do
+    with {:ok, %Image{} = image} <- ImageService.create(new_image) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/images/#{image}")

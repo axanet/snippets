@@ -31,5 +31,6 @@ gallery_api-*.tar
 
 /priv/static/uploads/*
 !/priv/static/uploads/.gitkeep
+/uploads
 
 .DS_Store

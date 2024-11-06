@@ -20,8 +20,8 @@ defmodule GalleryApiWeb.ImageJSON do
       id: image.id,
       title: image.title,
       description: image.description,
-      image_name: image.image_path.file_name,
-      image_url: GalleryApiWeb.Helpers.build_file_url(conn, image.image_path.file_name)
+      imageName: image.image_path.file_name,
+      imageUrl: GalleryApiWeb.Helpers.build_file_url(conn, image.image_path.file_name)
     }
   end
 end
