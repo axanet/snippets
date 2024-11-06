@@ -53,9 +53,4 @@ defmodule GalleryApiWeb.ImageController do
       send_resp(conn, :no_content, "")
     end
   end
-
-  defp build_file_url(conn, filename) do
-    # Construct the URL using the request's scheme and host
-    "#{conn.scheme}://#{conn.host}:#{conn.port}/uploads/#{filename}"
-  end
 end
