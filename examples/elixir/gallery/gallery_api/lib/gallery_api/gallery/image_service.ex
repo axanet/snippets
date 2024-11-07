@@ -11,15 +11,14 @@ defmodule GalleryApi.Gallery.ImageService do
         "title" => title,
         "description" => description
       }) do
-    upload_path = Path.join([:code.priv_dir(:gallery_api), "static", "uploads", upload.filename])
-    File.cp!(upload.path, upload_path)
+    with {:ok, file_path} <- GalleryApi.Image.store({upload, title}) do
+      image_params = %{
+        title: title,
+        description: description,
+        image_path: file_path
+      }
 
-    image_params = %{
-      title: title,
-      description: description,
-      image_path: upload_path
-    }
-
-    Gallery.create_image(image_params)
+      Gallery.create_image(image_params)
+    end
   end
 end
